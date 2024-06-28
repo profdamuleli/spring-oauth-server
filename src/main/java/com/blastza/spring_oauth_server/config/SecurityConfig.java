@@ -12,12 +12,13 @@ public class SecurityConfig {
 
     @Bean
     UserDetailsService inMemoryUserDetailsManager() {
-        var userBuilder = User.builder();
-        UserDetails user1 = userBuilder
-                .username("lutendo")
-                .password("{noop}admin")
-                .roles("USER", "ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(user1);
+        return new InMemoryUserDetailsManager(
+                User.builder()
+                        .username("lutendo")
+                        // "secret" is the password
+                        .password("{bcrypt}$2a$12$MadQWW7GS3p0rbaKAngonOQILUrgfsaCzS3MS0d4E69uvE1sGx28q")
+                        .roles("USER")
+                        .build()
+        );
     }
 }
