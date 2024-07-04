@@ -12,16 +12,16 @@ spring:
             require-authorization-consent: true                   # disables the need to consent to authorization after login
             registration:                                               # defines a new RegisteredClient
               client-authentication-methods: 'client_secret_basic'      # tells the auth-server that this client can authorize itself with basic authentication
-              client-id: auth-client
+              client-id: "auth-client"
               client-secret: '{bcrypt}$2a$12$MadQWW7GS3p0rbaKAngonOQILUrgfsaCzS3MS0d4E69uvE1sGx28q'
               redirect-uris:
-                - 'http://127.0.0.1:8080/login/oauth2/code/spring'        # defines the URLs that the auth-server may redirect to after successfully authenticating the user
+                - 'http://127.0.0.1:8082/login/oauth2/code/spring'        # defines the URLs that the auth-server may redirect to after successfully authenticating the user
               authorization-grant-types:
-                #- 'client_credentials'
+                - 'client_credentials'
                 - 'authorization_code'        # specifies that the auth-client needs to redirect the user to the authorization server to authenticate themselves. After user authentication, the authorization server redirects back to the auth-client application with an authorization code
-                #- 'refresh_token'
+                - 'refresh_token'
               scopes: 'user.read,user.write,openid'   # can limit the scope of user information the client can request from the auth-server
-server.forward-headers-strategy: framework   # configures correct header forwarding when deploying behind a reverse-proxy that handles the domain name
+#server.forward-headers-strategy: framework   # configures correct header forwarding when deploying behind a reverse-proxy that handles the domain name
 
 #This configures the authorization server to listen on port 8099
 #and registers a new OAuth2 client with the expected details of
